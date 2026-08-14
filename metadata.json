@@ -1,0 +1,5 @@
+{
+  "name": "thinking physics",
+  "description": "AI-powered science experiment generator that turns prompts into interactive PhET-style activity blueprints.",
+  "requestFramePermissions": []
+}
