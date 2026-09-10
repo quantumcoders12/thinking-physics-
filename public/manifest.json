@@ -1,0 +1,17 @@
+{
+  "name": "Thinking Physics",
+  "short_name": "ThinkingPhysics",
+  "description": "AI-powered interactive science experiment generator and physics simulator.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

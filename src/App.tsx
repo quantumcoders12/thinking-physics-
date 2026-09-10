@@ -32,7 +32,9 @@ import {
   Code2,
   ExternalLink,
   Moon,
-  Sun
+  Sun,
+  History,
+  Trash2
 } from 'lucide-react';
 import { generateExperiment, type AIProvider } from './services/gemini';
 import ReactMarkdown from 'react-markdown';
@@ -156,6 +158,24 @@ export default function App() {
   const [isQuantumUnlocked, setIsQuantumUnlocked] = useState(false);
   const [quantumBannerMsg, setQuantumBannerMsg] = useState<string | null>(null);
   const promptInputRef = useRef<HTMLTextAreaElement | null>(null);
+
+  // Experiment History state (loaded from local storage)
+  const [history, setHistory] = useState<{
+    id: string;
+    prompt: string;
+    timestamp: string;
+    experiment: ExperimentSpec;
+    isQuantumMode: boolean;
+  }[]>(() => {
+    try {
+      const saved = localStorage.getItem('thinking_physics_history');
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      console.error('Failed to load experiment history:', e);
+      return [];
+    }
+  });
+  const [showHistoryModal, setShowHistoryModal] = useState(false);
 
   useEffect(() => {
     if (promptInputRef.current) {
@@ -307,6 +327,20 @@ export default function App() {
       const result = await generateExperiment(prompt, savedKey, isQuantumMode, aiProvider);
       setExperiment(result);
       setActiveTab('simulation');
+
+      // Save to history
+      const newHistoryItem = {
+        id: Date.now().toString(),
+        prompt: prompt.trim(),
+        timestamp: new Date().toLocaleString(),
+        experiment: result,
+        isQuantumMode
+      };
+      setHistory(prev => {
+        const updated = [newHistoryItem, ...prev];
+        localStorage.setItem('thinking_physics_history', JSON.stringify(updated));
+        return updated;
+      });
     } catch (err: any) {
       console.error(err);
       if (err.message === 'QUOTA_EXCEEDED') {
@@ -382,6 +416,19 @@ export default function App() {
                 <span className="w-2.5 h-2.5 rounded-full bg-neon-green brutal-border inline-block" title="Custom API Key Active" />
               ) : (
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-400 brutal-border inline-block" title="Default / Shared Key" />
+              )}
+            </button>
+            <button
+              onClick={() => setShowHistoryModal(true)}
+              className="flex items-center gap-2 px-3.5 py-2 bg-gallery-white brutal-border brutal-shadow-hover text-xs font-bold uppercase transition-all cursor-pointer"
+              id="header-history-button"
+            >
+              <History className="w-4 h-4 text-brutal-black" />
+              <span>History</span>
+              {history.length > 0 && (
+                <span className="bg-neon-green text-brutal-black text-[10px] font-extrabold px-1.5 py-0.2 brutal-border rounded-full inline-block min-w-[18px] text-center">
+                  {history.length}
+                </span>
               )}
             </button>
             <nav className="flex gap-8">
@@ -479,12 +526,16 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             className="mt-12 mb-20 text-center"
           >
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-neon-green/20 brutal-border text-xs font-bold uppercase tracking-wider mb-6 brutal-shadow">
+              <Sparkles className="w-3.5 h-3.5 text-brutal-black" />
+              <span>Thinking Physics • AI Simulation Creator</span>
+            </div>
             <h2 className="font-display text-6xl md:text-8xl mb-6 leading-none uppercase">
               Turn Ideas into <br />
               <span className="text-neon-green bg-brutal-black px-4">Experiments</span>
             </h2>
             <p className="text-xl max-w-2xl mx-auto mb-10 font-medium opacity-70">
-              Generate interactive, visual science simulation blueprints for any topic, from quantum physics to cellular biology.
+              Generate interactive, visual physics simulations and experiment blueprints for any topic, from kinematics to quantum mechanics.
             </p>
 
             <form onSubmit={handleGenerate} className="max-w-3xl mx-auto relative group">
@@ -600,13 +651,13 @@ export default function App() {
               </div>
 
               <div className="brutal-border bg-neon-green p-6 brutal-shadow">
-                <h4 className="font-bold uppercase text-xs mb-2">PhET Analogy</h4>
+                <h4 className="font-bold uppercase text-xs mb-2">Simulation Blueprint</h4>
                 <p className="text-sm font-medium leading-relaxed">
-                  {experiment.phetAnalogy.description}
+                  {experiment.phetAnalogy?.description}
                 </p>
                 <div className="mt-4 pt-4 border-t border-brutal-black/20">
                   <span className="text-[10px] font-bold uppercase opacity-60">Category</span>
-                  <p className="text-xs font-bold uppercase">{experiment.phetAnalogy.recommendedPhETCategory}</p>
+                  <p className="text-xs font-bold uppercase">{experiment.phetAnalogy?.recommendedPhETCategory || 'Interactive Lab'}</p>
                 </div>
               </div>
             </aside>
@@ -1171,6 +1222,156 @@ export default function App() {
                   </span>
                 </div>
               </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* History Modal */}
+      <AnimatePresence>
+        {showHistoryModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs z-[100] flex items-center justify-center p-4"
+            onClick={() => setShowHistoryModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white brutal-border brutal-shadow max-w-2xl w-full p-6 relative flex flex-col max-h-[85vh]"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between pb-4 border-b-2 border-brutal-black mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-neon-green brutal-border flex items-center justify-center font-bold">
+                    <History className="w-4 h-4 text-brutal-black" />
+                  </div>
+                  <h3 className="font-display text-2xl uppercase tracking-tight">Experiment History</h3>
+                </div>
+                <button
+                  onClick={() => setShowHistoryModal(false)}
+                  className="p-1.5 hover:bg-gallery-white brutal-border transition-colors cursor-pointer"
+                  id="close-history-modal-btn"
+                  title="Close"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Body */}
+              <div className="overflow-y-auto flex-grow pr-1 space-y-4 my-2">
+                {history.length === 0 ? (
+                  <div className="text-center py-12 brutal-border bg-gallery-white p-6">
+                    <History className="w-12 h-12 mx-auto text-gray-400 mb-2 stroke-1" />
+                    <p className="font-bold text-sm">No experiments generated yet.</p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Once you generate a science experiment, it will appear here.
+                    </p>
+                  </div>
+                ) : (
+                  history.map((item) => {
+                    // Match subject color
+                    const subjectColors: Record<string, string> = {
+                      Physics: 'bg-blue-100 border-blue-400 text-blue-800',
+                      Chemistry: 'bg-orange-100 border-orange-400 text-orange-800',
+                      Biology: 'bg-green-100 border-green-400 text-green-800',
+                      'Earth Science': 'bg-amber-100 border-amber-400 text-amber-800',
+                    };
+                    const colorClass = subjectColors[item.experiment.meta.subject] || 'bg-gray-100 border-gray-400 text-gray-800';
+
+                    return (
+                      <div
+                        key={item.id}
+                        onClick={() => {
+                          setExperiment(item.experiment);
+                          setPrompt(item.prompt);
+                          setIsQuantumMode(item.isQuantumMode);
+                          setActiveTab('simulation');
+                          setShowHistoryModal(false);
+                        }}
+                        className="p-4 brutal-border bg-white hover:bg-neon-green/5 transition-colors cursor-pointer relative group flex flex-col sm:flex-row justify-between gap-4"
+                      >
+                        <div className="space-y-1">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="font-bold text-sm sm:text-base text-black">
+                              {item.experiment.meta.title}
+                            </span>
+                            <span className={`text-[10px] font-bold uppercase px-2 py-0.5 border ${colorClass}`}>
+                              {item.experiment.meta.subject}
+                            </span>
+                            {item.isQuantumMode && (
+                              <span className="text-[10px] font-bold uppercase px-2 py-0.5 border border-purple-400 bg-purple-100 text-purple-800">
+                                Quantum ⚡
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-xs italic text-gray-600 line-clamp-2 max-w-md">
+                            "{item.prompt}"
+                          </p>
+                          <p className="text-[10px] text-gray-450 font-mono">
+                            Generated on: {item.timestamp}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center justify-end gap-2 self-end sm:self-center">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setExperiment(item.experiment);
+                              setPrompt(item.prompt);
+                              setIsQuantumMode(item.isQuantumMode);
+                              setActiveTab('simulation');
+                              setShowHistoryModal(false);
+                            }}
+                            className="px-3 py-1.5 bg-neon-green text-brutal-black brutal-border font-bold uppercase text-[10px] brutal-shadow-hover transition-all cursor-pointer"
+                          >
+                            Load
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setHistory((prev) => {
+                                const updated = prev.filter((h) => h.id !== item.id);
+                                localStorage.setItem('thinking_physics_history', JSON.stringify(updated));
+                                return updated;
+                              });
+                            }}
+                            className="p-1.5 bg-red-50 text-red-600 hover:bg-red-100 brutal-border transition-colors cursor-pointer"
+                            title="Delete from history"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+
+              {/* Footer */}
+              {history.length > 0 && (
+                <div className="flex justify-between items-center pt-4 border-t-2 border-brutal-black mt-4">
+                  <span className="text-xs text-gray-500 font-bold uppercase">
+                    Total: {history.length} {history.length === 1 ? 'experiment' : 'experiments'}
+                  </span>
+                  <button
+                    onClick={() => {
+                      if (window.confirm("Are you sure you want to clear your entire history? This cannot be undone.")) {
+                        setHistory([]);
+                        localStorage.removeItem('thinking_physics_history');
+                      }
+                    }}
+                    className="px-4 py-2 bg-red-100 text-red-700 brutal-border font-bold uppercase text-xs brutal-shadow-hover cursor-pointer"
+                    id="clear-all-history-btn"
+                  >
+                    Clear All History
+                  </button>
+                </div>
+              )}
             </motion.div>
           </motion.div>
         )}
