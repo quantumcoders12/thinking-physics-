@@ -526,10 +526,6 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             className="mt-12 mb-20 text-center"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-neon-green/20 brutal-border text-xs font-bold uppercase tracking-wider mb-6 brutal-shadow">
-              <Sparkles className="w-3.5 h-3.5 text-brutal-black" />
-              <span>Thinking Physics • AI Simulation Creator</span>
-            </div>
             <h2 className="font-display text-6xl md:text-8xl mb-6 leading-none uppercase">
               Turn Ideas into <br />
               <span className="text-neon-green bg-brutal-black px-4">Experiments</span>
