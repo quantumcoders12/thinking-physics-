@@ -20,6 +20,12 @@
     background-color: #07090e !important;
     color: #f1f5f9 !important;
   }
+
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+  }
 }
 
 @layer components {

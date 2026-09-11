@@ -366,21 +366,21 @@ export default function App() {
     <div className="min-h-screen bg-gallery-white flex flex-col">
       {/* Header */}
       <header className="brutal-border border-t-0 border-x-0 bg-white sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-between">
           <div 
-            className="flex items-center gap-2 cursor-pointer group"
+            className="flex items-center gap-1.5 sm:gap-2 cursor-pointer group shrink-0"
             onClick={() => {
               setExperiment(null);
               setError(null);
             }}
             title="Go to Home / New Experiment"
           >
-            <div className="w-10 h-10 bg-neon-green brutal-border flex items-center justify-center brutal-shadow group-hover:translate-x-[1px] group-hover:translate-y-[1px] transition-transform">
-              <FlaskConical className="text-brutal-black" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-neon-green brutal-border flex items-center justify-center brutal-shadow group-hover:translate-x-[1px] group-hover:translate-y-[1px] transition-transform">
+              <FlaskConical className="w-4 h-4 sm:w-5 sm:h-5 text-brutal-black" />
             </div>
-            <h1 className="font-display text-2xl tracking-tight uppercase">Thinking Physics</h1>
+            <h1 className="font-display text-lg sm:text-2xl tracking-tight uppercase">Thinking Physics</h1>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1.5 sm:gap-4">
             {isQuantumUnlocked && (
               <button
                 onClick={() => {
@@ -393,7 +393,7 @@ export default function App() {
                       : 'dark mode deactivated'
                   );
                 }}
-                className={`flex items-center gap-1.5 px-3 py-2 text-xs font-bold uppercase brutal-border brutal-shadow-hover transition-all cursor-pointer ${
+                className={`flex items-center gap-1 px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-xs font-bold uppercase brutal-border brutal-shadow-hover transition-all cursor-pointer ${
                   isQuantumMode 
                     ? 'bg-purple-900 text-cyan-300 border-cyan-400' 
                     : 'bg-gallery-white text-brutal-black'
@@ -401,40 +401,40 @@ export default function App() {
                 title="Toggle Quantum Dark Mode"
                 id="quantum-mode-toggle-btn"
               >
-                <Sparkles className={`w-4 h-4 ${isQuantumMode ? 'text-cyan-300 animate-pulse' : 'text-purple-600'}`} />
-                <span className="hidden sm:inline">{isQuantumMode ? 'Quantum Mode ⚡' : 'Quantum Mode'}</span>
+                <Sparkles className={`w-3.5 h-3.5 ${isQuantumMode ? 'text-cyan-300 animate-pulse' : 'text-purple-600'}`} />
+                <span className="hidden md:inline">{isQuantumMode ? 'Quantum Mode ⚡' : 'Quantum Mode'}</span>
               </button>
             )}
             <button
               onClick={() => setShowKeyModal(true)}
-              className="flex items-center gap-2 px-3.5 py-2 bg-gallery-white brutal-border brutal-shadow-hover text-xs font-bold uppercase transition-all"
+              className="flex items-center gap-1.5 px-2 py-1.5 sm:px-3.5 sm:py-2 bg-gallery-white brutal-border brutal-shadow-hover text-[11px] sm:text-xs font-bold uppercase transition-all"
               id="header-api-key-button"
             >
-              <Key className="w-4 h-4 text-brutal-black" />
-              <span>API Key</span>
+              <Key className="w-3.5 h-3.5 text-brutal-black" />
+              <span className="hidden xs:inline sm:inline">API Key</span>
               {savedKey ? (
-                <span className="w-2.5 h-2.5 rounded-full bg-neon-green brutal-border inline-block" title="Custom API Key Active" />
+                <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-neon-green brutal-border inline-block" title="Custom API Key Active" />
               ) : (
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-400 brutal-border inline-block" title="Default / Shared Key" />
+                <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-400 brutal-border inline-block" title="Default / Shared Key" />
               )}
             </button>
             <button
               onClick={() => setShowHistoryModal(true)}
-              className="flex items-center gap-2 px-3.5 py-2 bg-gallery-white brutal-border brutal-shadow-hover text-xs font-bold uppercase transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-2 py-1.5 sm:px-3.5 sm:py-2 bg-gallery-white brutal-border brutal-shadow-hover text-[11px] sm:text-xs font-bold uppercase transition-all cursor-pointer"
               id="header-history-button"
             >
-              <History className="w-4 h-4 text-brutal-black" />
-              <span>History</span>
+              <History className="w-3.5 h-3.5 text-brutal-black" />
+              <span className="hidden xs:inline sm:inline">History</span>
               {history.length > 0 && (
-                <span className="bg-neon-green text-brutal-black text-[10px] font-extrabold px-1.5 py-0.2 brutal-border rounded-full inline-block min-w-[18px] text-center">
+                <span className="bg-neon-green text-brutal-black text-[9px] sm:text-[10px] font-extrabold px-1.5 py-0.2 brutal-border rounded-full inline-block min-w-[16px] text-center">
                   {history.length}
                 </span>
               )}
             </button>
-            <nav className="flex gap-8">
+            <nav className="flex gap-2 sm:gap-8">
               <button
                 onClick={() => setShowAboutModal(true)}
-                className="text-sm font-bold uppercase hover:underline underline-offset-4 cursor-pointer"
+                className="px-2 py-1.5 sm:p-0 text-xs sm:text-sm font-bold uppercase hover:underline underline-offset-4 cursor-pointer"
                 id="header-about-button"
               >
                 About
@@ -444,7 +444,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="flex-grow max-w-7xl mx-auto w-full px-4 py-8">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-3 sm:px-4 py-4 sm:py-8">
         {/* Quantum Mode Notification Banner */}
         {quantumBannerMsg && (
           <motion.div 
@@ -460,7 +460,7 @@ export default function App() {
                 <p className="text-sm font-bold uppercase tracking-wider">{quantumBannerMsg}</p>
               </div>
             </div>
-            <button
+            <button 
               onClick={() => setQuantumBannerMsg(null)}
               className="p-1 hover:opacity-75 cursor-pointer shrink-0"
               title="Dismiss"
@@ -524,21 +524,21 @@ export default function App() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-12 mb-20 text-center"
+            className="mt-6 sm:mt-12 mb-10 sm:mb-20 text-center px-1"
           >
-            <h2 className="font-display text-6xl md:text-8xl mb-6 leading-none uppercase">
+            <h2 className="font-display text-4xl sm:text-6xl md:text-8xl mb-3 sm:mb-6 leading-none uppercase">
               Turn Ideas into <br />
-              <span className="text-neon-green bg-brutal-black px-4">Experiments</span>
+              <span className="text-neon-green bg-brutal-black px-2 sm:px-4">Experiments</span>
             </h2>
-            <p className="text-xl max-w-2xl mx-auto mb-10 font-medium opacity-70">
+            <p className="text-sm sm:text-base md:text-xl max-w-2xl mx-auto mb-6 sm:mb-10 font-medium opacity-70 px-2 leading-relaxed">
               Generate interactive, visual physics simulations and experiment blueprints for any topic, from kinematics to quantum mechanics.
             </p>
 
             <form onSubmit={handleGenerate} className="max-w-3xl mx-auto relative group">
-              <div className="relative flex items-end">
+              <div className="relative flex flex-col sm:flex-row items-stretch sm:items-end brutal-border bg-white brutal-shadow">
                 <textarea 
                   ref={promptInputRef}
-                  rows={1}
+                  rows={2}
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   onKeyDown={(e) => {
@@ -550,25 +550,27 @@ export default function App() {
                     }
                   }}
                   placeholder="e.g., Refraction of light for class 9..."
-                  className="w-full min-h-[80px] py-5 pl-8 pr-44 text-xl brutal-border brutal-shadow focus:outline-none focus:ring-0 focus:bg-gallery-white transition-all resize-none overflow-hidden"
+                  className="w-full py-3.5 px-4 sm:py-5 sm:pl-8 sm:pr-40 text-base sm:text-xl focus:outline-none focus:ring-0 focus:bg-gallery-white transition-all resize-none border-0"
                 />
-                <button 
-                  type="submit"
-                  disabled={loading || !prompt.trim()}
-                  className="absolute right-4 top-3.5 h-12 px-6 bg-neon-green brutal-border font-bold uppercase flex items-center gap-2 brutal-shadow-hover disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {loading ? <Loader2 className="animate-spin" /> : <Sparkles className="w-5 h-5" />}
-                  Generate
-                </button>
+                <div className="p-2 sm:p-0 sm:absolute sm:right-4 sm:top-3.5 flex justify-end">
+                  <button 
+                    type="submit"
+                    disabled={loading || !prompt.trim()}
+                    className="w-full sm:w-auto h-10 sm:h-12 px-4 sm:px-6 bg-neon-green brutal-border font-bold uppercase text-xs sm:text-sm flex items-center justify-center gap-2 brutal-shadow-hover disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  >
+                    {loading ? <Loader2 className="animate-spin w-4 h-4" /> : <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />}
+                    <span>Generate</span>
+                  </button>
+                </div>
               </div>
               
-              <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-1.5 sm:gap-3">
                 {['Buoyancy Basics', 'Photosynthesis Grade 7', 'Ohm\'s Law', 'Titration Curves', 'Plate Tectonics'].map((suggestion) => (
                   <button
                     key={suggestion}
                     onClick={() => setPrompt(suggestion)}
                     type="button"
-                    className="px-4 py-2 text-xs font-bold uppercase brutal-border bg-white hover:bg-neon-green transition-colors"
+                    className="px-2.5 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-bold uppercase brutal-border bg-white hover:bg-neon-green transition-colors cursor-pointer"
                   >
                     {suggestion}
                   </button>
@@ -611,47 +613,47 @@ export default function App() {
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8"
           >
             {/* Sidebar / Meta */}
-            <aside className="lg:col-span-3 space-y-6">
-              <div className="brutal-border bg-white p-6 brutal-shadow">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="px-2 py-1 bg-brutal-black text-neon-green text-[10px] font-bold uppercase">
+            <aside className="lg:col-span-3 space-y-4 sm:space-y-6">
+              <div className="brutal-border bg-white p-4 sm:p-6 brutal-shadow">
+                <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                  <span className="px-2 py-0.5 bg-brutal-black text-neon-green text-[10px] font-bold uppercase">
                     {experiment.meta.subject}
                   </span>
-                  <span className="px-2 py-1 brutal-border text-[10px] font-bold uppercase">
+                  <span className="px-2 py-0.5 brutal-border text-[10px] font-bold uppercase">
                     Grade {experiment.meta.gradeLevel}
                   </span>
                 </div>
-                <h2 className="font-display text-3xl uppercase leading-tight mb-4">
+                <h2 className="font-display text-xl sm:text-3xl uppercase leading-tight mb-3 sm:mb-4">
                   {experiment.meta.title}
                 </h2>
-                <div className="space-y-3 text-sm font-medium">
+                <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm font-medium">
                   <div className="flex items-center gap-2 opacity-70">
-                    <Settings className="w-4 h-4" />
+                    <Settings className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     <span>Topic: {experiment.meta.topic}</span>
                   </div>
                   <div className="flex items-center gap-2 opacity-70">
-                    <Play className="w-4 h-4" />
+                    <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     <span>Duration: {experiment.meta.estimatedDurationMinutes} mins</span>
                   </div>
                 </div>
                 
                 <button 
                   onClick={() => setExperiment(null)}
-                  className="mt-8 w-full py-3 brutal-border font-bold uppercase text-xs flex items-center justify-center gap-2 hover:bg-red-50 transition-colors"
+                  className="mt-4 sm:mt-8 w-full py-2.5 sm:py-3 brutal-border font-bold uppercase text-xs flex items-center justify-center gap-2 hover:bg-red-50 transition-colors cursor-pointer"
                 >
                   New Experiment
                 </button>
               </div>
 
-              <div className="brutal-border bg-neon-green p-6 brutal-shadow">
-                <h4 className="font-bold uppercase text-xs mb-2">Simulation Blueprint</h4>
-                <p className="text-sm font-medium leading-relaxed">
+              <div className="brutal-border bg-neon-green p-4 sm:p-6 brutal-shadow">
+                <h4 className="font-bold uppercase text-xs mb-1.5 sm:mb-2">Simulation Blueprint</h4>
+                <p className="text-xs sm:text-sm font-medium leading-relaxed">
                   {experiment.phetAnalogy?.description}
                 </p>
-                <div className="mt-4 pt-4 border-t border-brutal-black/20">
+                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-brutal-black/20">
                   <span className="text-[10px] font-bold uppercase opacity-60">Category</span>
                   <p className="text-xs font-bold uppercase">{experiment.phetAnalogy?.recommendedPhETCategory || 'Interactive Lab'}</p>
                 </div>
@@ -659,14 +661,14 @@ export default function App() {
             </aside>
 
             {/* Main Content Area */}
-            <div className="lg:col-span-9 space-y-8">
+            <div className="lg:col-span-9 space-y-4 sm:space-y-8">
               {/* Tabs */}
               <div className="flex brutal-border bg-white brutal-shadow overflow-hidden">
                 {(['simulation', 'guide', 'quiz'] as const).map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`flex-1 py-4 font-display text-xl uppercase transition-colors ${
+                    className={`flex-1 py-2.5 sm:py-4 font-display text-sm sm:text-xl uppercase transition-colors cursor-pointer ${
                       activeTab === tab ? 'bg-brutal-black text-neon-green' : 'hover:bg-gallery-white'
                     } ${tab !== 'quiz' ? 'border-r-2 border-brutal-black' : ''}`}
                   >
@@ -676,61 +678,61 @@ export default function App() {
               </div>
 
               {/* Tab Content */}
-              <div className="min-h-[600px]">
+              <div className="min-h-[400px] sm:min-h-[600px]">
                 {activeTab === 'simulation' && (
                   <motion.div 
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="space-y-8"
+                    className="space-y-4 sm:space-y-8"
                   >
                     {/* Interactive Simulation */}
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       <div className="flex items-center justify-between">
-                        <h3 className="font-display text-2xl uppercase flex items-center gap-2">
-                          <Play className="w-6 h-6 fill-current" />
+                        <h3 className="font-display text-lg sm:text-2xl uppercase flex items-center gap-1.5 sm:gap-2">
+                          <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
                           Interactive Simulation
                         </h3>
-                        <div className="flex items-center gap-2 text-[10px] font-bold uppercase opacity-50">
+                        <div className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase opacity-50">
                           <Info className="w-3 h-3" />
-                          <span>Powered by p5.js</span>
+                          <span>p5.js</span>
                         </div>
                       </div>
                       <SimulationCanvas code={experiment.visualSimulation.simulationCode} />
                     </div>
 
                     {/* Scene Blueprint */}
-                    <div className="brutal-border bg-white p-8 brutal-shadow relative overflow-hidden">
+                    <div className="brutal-border bg-white p-4 sm:p-8 brutal-shadow relative overflow-hidden">
                       <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-                        <FlaskConical className="w-64 h-64" />
+                        <FlaskConical className="w-32 h-32 sm:w-64 sm:h-64" />
                       </div>
                       
-                      <h3 className="font-display text-2xl uppercase mb-6 flex items-center gap-2">
-                        <Play className="w-6 h-6 fill-current" />
+                      <h3 className="font-display text-lg sm:text-2xl uppercase mb-4 sm:mb-6 flex items-center gap-2">
+                        <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
                         Simulation Blueprint
                       </h3>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12">
                         <div>
-                          <h4 className="text-xs font-bold uppercase mb-4 text-gray-500">Scene Layout</h4>
-                          <p className="text-lg font-medium leading-relaxed mb-8">
+                          <h4 className="text-xs font-bold uppercase mb-2 sm:mb-4 text-gray-500">Scene Layout</h4>
+                          <p className="text-sm sm:text-lg font-medium leading-relaxed mb-6 sm:mb-8">
                             {experiment.visualSimulation.sceneDescription}
                           </p>
                           
-                          <h4 className="text-xs font-bold uppercase mb-4 text-gray-500">Interactive Objects</h4>
-                          <div className="space-y-4">
+                          <h4 className="text-xs font-bold uppercase mb-2 sm:mb-4 text-gray-500">Interactive Objects</h4>
+                          <div className="space-y-3 sm:space-y-4">
                             {experiment.visualSimulation.objects.map((obj, idx) => (
-                              <div key={idx} className="p-4 brutal-border bg-gallery-white">
+                              <div key={idx} className="p-3 sm:p-4 brutal-border bg-gallery-white">
                                 <div className="flex justify-between items-start mb-2">
                                   <span className="font-mono text-xs font-bold uppercase px-2 py-0.5 bg-brutal-black text-white">
                                     {obj.id}
                                   </span>
                                   <span className="text-xs font-bold uppercase opacity-60">{obj.type}</span>
                                 </div>
-                                <div className="grid grid-cols-2 gap-4 mt-3">
+                                <div className="grid grid-cols-2 gap-2 sm:gap-4 mt-2 sm:mt-3">
                                   {Object.entries(obj.properties.initialValues || {}).map(([k, v]) => (
                                     <div key={k}>
                                       <span className="text-[10px] uppercase block opacity-50">{k}</span>
-                                      <span className="font-mono text-sm">{String(v)} {obj.properties.units?.[k] || ''}</span>
+                                      <span className="font-mono text-xs sm:text-sm">{String(v)} {obj.properties.units?.[k] || ''}</span>
                                     </div>
                                   ))}
                                 </div>
@@ -739,23 +741,23 @@ export default function App() {
                           </div>
                         </div>
 
-                        <div className="space-y-8">
+                        <div className="space-y-6 sm:space-y-8">
                           <div>
-                            <h4 className="text-xs font-bold uppercase mb-4 text-gray-500">User Controls</h4>
-                            <div className="space-y-4">
+                            <h4 className="text-xs font-bold uppercase mb-2 sm:mb-4 text-gray-500">User Controls</h4>
+                            <div className="space-y-3 sm:space-y-4">
                               {experiment.visualSimulation.controls.map((ctrl, idx) => (
-                                <div key={idx} className="p-4 brutal-border bg-white brutal-shadow-hover cursor-default">
+                                <div key={idx} className="p-3 sm:p-4 brutal-border bg-white brutal-shadow-hover cursor-default">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <Settings className="w-4 h-4" />
-                                    <span className="font-bold uppercase text-sm">{ctrl.label}</span>
-                                    <span className="ml-auto text-[10px] font-bold uppercase px-2 py-0.5 brutal-border">
+                                    <Settings className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                                    <span className="font-bold uppercase text-xs sm:text-sm">{ctrl.label}</span>
+                                    <span className="ml-auto text-[9px] sm:text-[10px] font-bold uppercase px-1.5 sm:px-2 py-0.5 brutal-border">
                                       {ctrl.controlType}
                                     </span>
                                   </div>
-                                  <p className="text-xs opacity-70 mb-3">{ctrl.effectDescription}</p>
+                                  <p className="text-xs opacity-70 mb-2 sm:mb-3">{ctrl.effectDescription}</p>
                                   {ctrl.range && (
                                     <div className="h-1 bg-gray-200 rounded-full relative">
-                                      <div className="absolute left-1/2 -translate-x-1/2 -top-1 w-3 h-3 bg-brutal-black brutal-border" />
+                                      <div className="absolute left-1/2 -translate-x-1/2 -top-1 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-brutal-black brutal-border" />
                                       <div className="flex justify-between mt-2 text-[10px] font-mono opacity-50">
                                         <span>{ctrl.range.min}</span>
                                         <span>{ctrl.range.max}</span>
@@ -768,12 +770,12 @@ export default function App() {
                           </div>
 
                           <div>
-                            <h4 className="text-xs font-bold uppercase mb-4 text-gray-500">Measurement Displays</h4>
-                            <div className="grid grid-cols-2 gap-4">
+                            <h4 className="text-xs font-bold uppercase mb-2 sm:mb-4 text-gray-500">Measurement Displays</h4>
+                            <div className="grid grid-cols-2 gap-2 sm:gap-4">
                               {experiment.visualSimulation.measurementDisplays.map((disp, idx) => (
-                                <div key={idx} className="p-4 brutal-border bg-brutal-black text-neon-green font-mono">
-                                  <div className="text-[10px] uppercase opacity-60 mb-1">{disp.type}</div>
-                                  <div className="text-sm font-bold">{disp.shows}</div>
+                                <div key={idx} className="p-3 sm:p-4 brutal-border bg-brutal-black text-neon-green font-mono">
+                                  <div className="text-[9px] sm:text-[10px] uppercase opacity-60 mb-0.5 sm:mb-1">{disp.type}</div>
+                                  <div className="text-xs sm:text-sm font-bold">{disp.shows}</div>
                                 </div>
                               ))}
                             </div>
@@ -783,22 +785,22 @@ export default function App() {
                     </div>
 
                     {/* Visual Behaviors */}
-                    <div className="brutal-border bg-white p-8 brutal-shadow">
-                      <h3 className="font-display text-2xl uppercase mb-6 flex items-center gap-2">
-                        <Zap className="w-6 h-6" />
+                    <div className="brutal-border bg-white p-4 sm:p-8 brutal-shadow">
+                      <h3 className="font-display text-lg sm:text-2xl uppercase mb-4 sm:mb-6 flex items-center gap-2">
+                        <Zap className="w-5 h-5 sm:w-6 sm:h-6" />
                         Dynamic Behaviors
                       </h3>
-                      <div className="space-y-4">
+                      <div className="space-y-3 sm:space-y-4">
                         {experiment.visualSimulation.visualBehaviors.map((behavior, idx) => (
-                          <div key={idx} className="flex flex-col md:flex-row gap-4 items-start md:items-center p-4 brutal-border hover:bg-gallery-white transition-colors">
-                            <div className="flex-1">
+                          <div key={idx} className="flex flex-col md:flex-row gap-2 sm:gap-4 items-start md:items-center p-3 sm:p-4 brutal-border hover:bg-gallery-white transition-colors">
+                            <div className="flex-1 w-full">
                               <span className="text-[10px] font-bold uppercase text-gray-400 block mb-1">When</span>
-                              <code className="font-mono text-sm bg-brutal-black text-white px-2 py-1">{behavior.when}</code>
+                              <code className="font-mono text-xs sm:text-sm bg-brutal-black text-white px-2 py-0.5 sm:py-1 block sm:inline-block">{behavior.when}</code>
                             </div>
-                            <ArrowRight className="hidden md:block w-6 h-6 text-neon-green" />
+                            <ArrowRight className="hidden md:block w-5 h-5 sm:w-6 sm:h-6 text-neon-green" />
                             <div className="flex-1">
                               <span className="text-[10px] font-bold uppercase text-gray-400 block mb-1">Then</span>
-                              <p className="font-medium">{behavior.then}</p>
+                              <p className="font-medium text-xs sm:text-base">{behavior.then}</p>
                             </div>
                           </div>
                         ))}
@@ -811,32 +813,32 @@ export default function App() {
                   <motion.div 
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="space-y-8"
+                    className="space-y-4 sm:space-y-8"
                   >
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                      <div className="md:col-span-2 space-y-8">
-                        <div className="brutal-border bg-white p-8 brutal-shadow">
-                          <h3 className="font-display text-2xl uppercase mb-6 flex items-center gap-2">
-                            <BookOpen className="w-6 h-6" />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
+                      <div className="md:col-span-2 space-y-4 sm:space-y-8">
+                        <div className="brutal-border bg-white p-4 sm:p-8 brutal-shadow">
+                          <h3 className="font-display text-lg sm:text-2xl uppercase mb-3 sm:mb-6 flex items-center gap-2">
+                            <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />
                             Science Explanation
                           </h3>
                           <div className="prose prose-slate max-w-none">
-                            <h4 className="font-bold uppercase text-sm mb-2 text-neon-green bg-brutal-black inline-block px-2">Intuitive Overview</h4>
-                            <p className="text-lg font-medium leading-relaxed mb-8">
+                            <h4 className="font-bold uppercase text-xs sm:text-sm mb-2 text-neon-green bg-brutal-black inline-block px-2">Intuitive Overview</h4>
+                            <p className="text-sm sm:text-lg font-medium leading-relaxed mb-6 sm:mb-8">
                               {experiment.labGuide.scienceExplanation.intuitiveOverview}
                             </p>
                             
-                            <h4 className="font-bold uppercase text-sm mb-2 text-neon-green bg-brutal-black inline-block px-2">Formal Explanation</h4>
-                            <div className="text-base leading-relaxed space-y-4">
+                            <h4 className="font-bold uppercase text-xs sm:text-sm mb-2 text-neon-green bg-brutal-black inline-block px-2">Formal Explanation</h4>
+                            <div className="text-xs sm:text-base leading-relaxed space-y-3 sm:space-y-4">
                               <ReactMarkdown>{experiment.labGuide.scienceExplanation.formalExplanation}</ReactMarkdown>
                             </div>
 
                             {experiment.labGuide.scienceExplanation.keyEquations.length > 0 && (
-                              <div className="mt-8 p-6 bg-gallery-white brutal-border">
-                                <h4 className="text-xs font-bold uppercase mb-4">Key Equations</h4>
-                                <div className="space-y-4">
+                              <div className="mt-6 sm:mt-8 p-3 sm:p-6 bg-gallery-white brutal-border">
+                                <h4 className="text-xs font-bold uppercase mb-3 sm:mb-4">Key Equations</h4>
+                                <div className="space-y-2 sm:space-y-4">
                                   {experiment.labGuide.scienceExplanation.keyEquations.map((eq, idx) => (
-                                    <div key={idx} className="font-mono text-xl text-center py-4 bg-white brutal-border">
+                                    <div key={idx} className="font-mono text-sm sm:text-xl text-center py-2.5 sm:py-4 bg-white brutal-border overflow-x-auto">
                                       {eq}
                                     </div>
                                   ))}
@@ -846,42 +848,42 @@ export default function App() {
                           </div>
                         </div>
 
-                        <div className="brutal-border bg-white p-8 brutal-shadow">
-                          <h3 className="font-display text-2xl uppercase mb-6 flex items-center gap-2">
-                            <Settings className="w-6 h-6" />
+                        <div className="brutal-border bg-white p-4 sm:p-8 brutal-shadow">
+                          <h3 className="font-display text-lg sm:text-2xl uppercase mb-4 sm:mb-6 flex items-center gap-2">
+                            <Settings className="w-5 h-5 sm:w-6 sm:h-6" />
                             Procedure
                           </h3>
-                          <div className="space-y-6">
+                          <div className="space-y-4 sm:space-y-6">
                             {experiment.labGuide.procedure.map((step, idx) => (
-                              <div key={idx} className="flex gap-6 items-start">
-                                <div className="w-10 h-10 shrink-0 brutal-border bg-brutal-black text-neon-green flex items-center justify-center font-display text-xl">
+                              <div key={idx} className="flex gap-3 sm:gap-6 items-start">
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 shrink-0 brutal-border bg-brutal-black text-neon-green flex items-center justify-center font-display text-base sm:text-xl">
                                   {idx + 1}
                                 </div>
-                                <p className="text-lg font-medium pt-1">{step}</p>
+                                <p className="text-sm sm:text-lg font-medium pt-0.5">{step}</p>
                               </div>
                             ))}
                           </div>
                         </div>
                       </div>
 
-                      <div className="space-y-8">
-                        <div className="brutal-border bg-white p-6 brutal-shadow">
-                          <h4 className="font-display text-xl uppercase mb-4">Learning Objectives</h4>
-                          <ul className="space-y-3">
+                      <div className="space-y-4 sm:space-y-8">
+                        <div className="brutal-border bg-white p-4 sm:p-6 brutal-shadow">
+                          <h4 className="font-display text-base sm:text-xl uppercase mb-3 sm:mb-4">Learning Objectives</h4>
+                          <ul className="space-y-2 sm:space-y-3">
                             {experiment.labGuide.learningObjectives.map((obj, idx) => (
-                              <li key={idx} className="flex gap-2 items-start text-sm font-medium">
-                                <CheckCircle2 className="w-4 h-4 shrink-0 text-neon-green" />
+                              <li key={idx} className="flex gap-2 items-start text-xs sm:text-sm font-medium">
+                                <CheckCircle2 className="w-4 h-4 shrink-0 text-neon-green mt-0.5" />
                                 <span>{obj}</span>
                               </li>
                             ))}
                           </ul>
                         </div>
 
-                        <div className="brutal-border bg-white p-6 brutal-shadow">
-                          <h4 className="font-display text-xl uppercase mb-4">Materials Needed</h4>
-                          <ul className="space-y-3">
+                        <div className="brutal-border bg-white p-4 sm:p-6 brutal-shadow">
+                          <h4 className="font-display text-base sm:text-xl uppercase mb-3 sm:mb-4">Materials Needed</h4>
+                          <ul className="space-y-2 sm:space-y-3">
                             {experiment.labGuide.materials.map((mat, idx) => (
-                              <li key={idx} className="flex gap-2 items-start text-sm font-medium">
+                              <li key={idx} className="flex gap-2 items-start text-xs sm:text-sm font-medium">
                                 <div className="w-1.5 h-1.5 rounded-full bg-brutal-black mt-1.5 shrink-0" />
                                 <span>{mat}</span>
                               </li>
@@ -889,14 +891,14 @@ export default function App() {
                           </ul>
                         </div>
 
-                        <div className="brutal-border bg-red-50 p-6 brutal-shadow">
-                          <h4 className="font-display text-xl uppercase mb-4 flex items-center gap-2">
-                            <AlertTriangle className="w-5 h-5" />
+                        <div className="brutal-border bg-red-50 p-4 sm:p-6 brutal-shadow">
+                          <h4 className="font-display text-base sm:text-xl uppercase mb-3 sm:mb-4 flex items-center gap-2">
+                            <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5" />
                             Safety
                           </h4>
-                          <ul className="space-y-3">
+                          <ul className="space-y-2 sm:space-y-3">
                             {experiment.labGuide.safetyPrecautions.map((safe, idx) => (
-                              <li key={idx} className="text-xs font-bold uppercase leading-tight">
+                              <li key={idx} className="text-[11px] sm:text-xs font-bold uppercase leading-tight">
                                 • {safe}
                               </li>
                             ))}
@@ -911,39 +913,39 @@ export default function App() {
                   <motion.div 
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="max-w-3xl mx-auto space-y-8"
+                    className="max-w-3xl mx-auto space-y-4 sm:space-y-8"
                   >
-                    <div className="text-center mb-12">
-                      <h3 className="font-display text-4xl uppercase mb-4">Check Your Understanding</h3>
-                      <p className="text-lg opacity-70">Test your knowledge of the concepts covered in this experiment.</p>
+                    <div className="text-center mb-6 sm:mb-12">
+                      <h3 className="font-display text-2xl sm:text-4xl uppercase mb-2 sm:mb-4">Check Your Understanding</h3>
+                      <p className="text-sm sm:text-lg opacity-70">Test your knowledge of the concepts covered in this experiment.</p>
                     </div>
 
                     {experiment.labGuide.checkYourUnderstanding.map((q, qIdx) => (
-                      <div key={qIdx} className="brutal-border bg-white p-8 brutal-shadow">
-                        <div className="flex gap-4 mb-6">
-                          <span className="font-display text-2xl opacity-20">Q{qIdx + 1}</span>
-                          <h4 className="text-xl font-bold leading-tight">{q.question}</h4>
+                      <div key={qIdx} className="brutal-border bg-white p-4 sm:p-8 brutal-shadow">
+                        <div className="flex gap-3 sm:gap-4 mb-4 sm:mb-6">
+                          <span className="font-display text-lg sm:text-2xl opacity-20">Q{qIdx + 1}</span>
+                          <h4 className="text-base sm:text-xl font-bold leading-tight">{q.question}</h4>
                         </div>
-                        <div className="grid grid-cols-1 gap-4">
+                        <div className="grid grid-cols-1 gap-2.5 sm:gap-4">
                           {q.options.map((opt: string, oIdx: number) => (
                             <button
                               key={oIdx}
-                              className="p-4 brutal-border text-left font-medium hover:bg-neon-green transition-colors group flex items-center justify-between"
+                              className="p-3 sm:p-4 brutal-border text-left text-xs sm:text-sm font-medium hover:bg-neon-green transition-colors group flex items-center justify-between cursor-pointer"
                             >
                               <span>{opt}</span>
-                              <ChevronRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 opacity-0 group-hover:opacity-100 transition-opacity" />
                             </button>
                           ))}
                         </div>
-                        <div className="mt-8 pt-8 border-t-2 border-dashed border-brutal-black/10">
+                        <div className="mt-4 sm:mt-8 pt-4 sm:pt-8 border-t-2 border-dashed border-brutal-black/10">
                           <details className="group">
-                            <summary className="cursor-pointer list-none flex items-center gap-2 font-bold uppercase text-xs text-gray-400 hover:text-brutal-black transition-colors">
-                              <Info className="w-4 h-4" />
+                            <summary className="cursor-pointer list-none flex items-center gap-2 font-bold uppercase text-[10px] sm:text-xs text-gray-400 hover:text-brutal-black transition-colors">
+                              <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                               Show Correct Answer & Explanation
                             </summary>
-                            <div className="mt-4 p-4 bg-neon-green/10 brutal-border">
-                              <p className="font-bold mb-2">Correct Answer: {q.options[q.correctOptionIndex]}</p>
-                              <p className="text-sm leading-relaxed">{q.explanation}</p>
+                            <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-neon-green/10 brutal-border">
+                              <p className="font-bold text-xs sm:text-sm mb-1 sm:mb-2">Correct Answer: {q.options[q.correctOptionIndex]}</p>
+                              <p className="text-xs sm:text-sm leading-relaxed">{q.explanation}</p>
                             </div>
                           </details>
                         </div>
